@@ -83,7 +83,7 @@ int read_file(inode *node, char *buf) {
 		int rres = read(fbuffer, node->lba_block + i + 1, 1);
 		if (rres)
 			return -1;
-		memcpy((unsigned char *)fbuffer, (unsigned char *)buf, 512);
+		memcpy((unsigned char *)fbuffer, (unsigned char *)buf + 512 * i, 512);
 	}
 	return 0;
 }
