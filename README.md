@@ -6,7 +6,10 @@ Toy Operating System for concept learning
 - VGA display driver
 - ATA Drive IO Driver
 - Readonly USTAR "filesystem" driver
+- Paging
+- GDT setting
 ## TODO
+- Interrupts
 - Keyboard IO Driver
 - Process scheduling
 - Memory management
