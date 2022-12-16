@@ -41,6 +41,8 @@ void kernel_main() {
 		prints("\n");
 	}
 	
+	asm volatile ("int $0x05");
+	
 	vga_terminal_writestring("Hello, low-level world!\n");
 	
 }

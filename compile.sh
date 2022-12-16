@@ -11,7 +11,7 @@ i686-elf-gcc -c strings.c -o ../bin/strings.o -std=gnu99 -ffreestanding -O2 -Wal
 i686-elf-gcc -c descriptor_tables.c -o ../bin/descriptor_tables.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 i686-elf-gcc -c memory.c -o ../bin/memory.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 cd ../bin/
-i686-elf-gcc -T ../linker.ld -o os.bin -ffreestanding -O2 -nostdlib boot.o functions.o kernel.o disk.o serial.o descriptor_tables.o strings.o ustar.o vga.o memory.o -lgcc
+i686-elf-gcc -T ../linker.ld -o os.bin -ffreestanding -O2 -nostdlib boot.o functions.o kernel.o disk.o serial.o isr.o descriptor_tables.o strings.o ustar.o vga.o memory.o -lgcc
 cd ..
 cp ./bin/os.bin isodir/boot/os.bin
 cp grub.cfg isodir/boot/grub/grub.cfg

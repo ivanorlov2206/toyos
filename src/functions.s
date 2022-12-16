@@ -74,4 +74,39 @@ complete_flush:
 	
 	ret
 	
+.global idt_flush
+.type idt_flush, @function
+
+idt_flush:
+	mov 4(%esp), %eax
+	lidt (%eax)
+	ret
+	
+.macro ISR_NOERR p
+.global isr\p
+.type isr\p, @function
+isr\p:
+	cli
+	push $0
+	push $\p
+	jmp isr_common_stub
+.endm
+
+ISR_NOERR 0
+ISR_NOERR 1
+ISR_NOERR 2
+ISR_NOERR 3
+ISR_NOERR 4
+ISR_NOERR 5
+ISR_NOERR 6
+ISR_NOERR 7
+ISR_NOERR 8
+ISR_NOERR 9
+
+isr_common_stub:
+	cli
+	call isr_handler
+	add $8, %esp
+	sti
+	iret
 	
