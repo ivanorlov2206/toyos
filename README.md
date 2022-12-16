@@ -8,8 +8,8 @@ Toy Operating System for concept learning
 - Readonly USTAR "filesystem" driver
 - Paging
 - GDT setting
-## TODO
 - Interrupts
+## TODO
 - Keyboard IO Driver
 - Process scheduling
 - Memory management
