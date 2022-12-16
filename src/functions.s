@@ -24,6 +24,9 @@ inb:
 	pop %ebp
 	ret
 	
+
+
+
 .global in16
 .type in16, @function
 
@@ -49,4 +52,26 @@ out16:
 	xor %eax, %eax
 	ret
 	
+.global gdt_flush
+.type gdt_flush, @function
 
+gdt_flush:
+
+	mov 4(%esp), %eax
+	lgdt (%eax)
+	
+	mov $0x10, %ax
+	mov %ax, %ds
+	mov %eax, %es
+	
+	mov %eax, %fs
+	mov %eax, %gs
+	mov %eax, %ss
+	
+	
+	jmp $0x08,$complete_flush
+complete_flush:
+	
+	ret
+	
+	

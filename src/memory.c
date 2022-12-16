@@ -15,3 +15,8 @@ void memcpy(unsigned char *src, unsigned char *dst, size_t count) {
 		dst[i] = src[i];
 	}
 }
+
+void memset(unsigned char *src, unsigned char value, size_t count) {
+	for (size_t i = 0; i < count; i++)
+		*(src + i) = value;
+}
