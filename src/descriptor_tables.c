@@ -2,7 +2,8 @@
 #include "serial.h"
 #include "memory.h"
 
-#define IDT_COUNT 10
+#define ISR_COUNT 10
+#define GDT_ENTRIES_COUNT 5
 
 #define SET_INT(num) idt_set_gate(num, (uint32_t) isr ## num, 0x08, 0x8E)
 
@@ -14,11 +15,11 @@ extern void idt_flush(uint32_t idt_addr);
 static void init_idt();
 static void idt_set_gate(uint8_t, uint32_t, uint16_t, uint8_t);
 
-idt_entry_t idt_entries[IDT_COUNT];
+idt_entry_t idt_entries[ISR_COUNT];
 idt_descriptor idt_ptr;
 
 
-segment_descriptor_t gdt_entries[5];
+segment_descriptor_t gdt_entries[GDT_ENTRIES_COUNT];
 gdt_descriptor gdt_ptr;
 #define SERIAL_PORT 0x3f8
 
@@ -29,7 +30,7 @@ void init_descriptor_tables() {
 
 static void init_gdt() {
 	gdt_ptr.offset = (uint32_t) &gdt_entries;
-	gdt_ptr.size = (sizeof(segment_descriptor_t) * 5) - 1;
+	gdt_ptr.size = (sizeof(segment_descriptor_t) * GDT_ENTRIES_COUNT) - 1;
 	gdt_set_gate(0, 0, 0, 0, 0);
 	gdt_set_gate(1, 0, 0xFFFFFFFF, 0xCF, 0x9A);
 	gdt_set_gate(2, 0, 0xFFFFFFFF, 0xCF, 0x92);
@@ -41,9 +42,9 @@ static void init_gdt() {
 
 static void init_idt() {
 	idt_ptr.base = (uint32_t) &idt_entries;
-	idt_ptr.limit = (sizeof(idt_entry_t) * IDT_COUNT) - 1;
+	idt_ptr.limit = (sizeof(idt_entry_t) * ISR_COUNT) - 1;
 	
-	memset(&idt_entries, 0, sizeof(idt_entry_t) * IDT_COUNT);
+	memset(&idt_entries, 0, sizeof(idt_entry_t) * ISR_COUNT);
 	
 	SET_INT(0);
 	SET_INT(1);
