@@ -15,13 +15,13 @@ Toy Operating System for OS design concept learning
 - Memory management
 
 ## How to build
-Simply execute
+For successful build of this project, you have to install GCC Cross Compiler, you can find installation tutorial [here](https://wiki.osdev.org/GCC_Cross-Compiler)
+When GCC is successfully installed, execute
 ```
 ./compile.sh
 ```
-(Need GCC Cross Compiler for success)
 ## How to run
+Run script installs compiled image of ToyOS into QEMU virtual machine.
 ```
 ./run.sh
 ```
-(Need QEMU for success)
