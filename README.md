@@ -1,5 +1,5 @@
 # ToyOS
-Toy Operating System for concept learning
+Toy Operating System for OS design concept learning
 
 ## Implemented
 - Serial port driver
